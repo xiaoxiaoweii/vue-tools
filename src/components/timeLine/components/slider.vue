@@ -7,55 +7,38 @@
       :disabled="disabled"
       vertical
       show-stops
-      height="200px"
+      height="150px"
       :marks="sliderMarks"
       ref="sliderRef"
       @change="changeSliderValue(sliderValue)"
     ></el-slider>
-    <button @click="addSliderMarks">添加</button>
   </div>
 </template>
 <script>
+import { sliderMarks, sliderStep, sliderValue } from '../../../common/js/timeLine'
 export default {
   data () {
     return {
-      // 滑块可选离散数 数值为多少百分比一个
-      sliderStep: 33,
+      // 滑块可选位置数值 即离散相距间隔
+      sliderStep: sliderStep,
       // 滑块默认值
-      sliderValue: 30,
+      sliderValue: sliderValue,
       // 滑块是否禁用
       disabled: false,
       // 滑块标记
-      sliderMarks : {
-
-      }
-      // sliderMarks: {
-      //   0: '3h',
-      //   33: '1h',
-      //   66: '0.5h',
-      //   99: '5min'
-      // }
+      sliderMarks : sliderMarks
     }
   },
   methods: {
     // 改变slider的值
     changeSliderValue (sliderValue) {
       // 滑动块的值
-      console.log(sliderValue)
-      console.log(this.$refs.sliderRef.value)
+      // console.log(sliderValue)
+      // console.log(this.$refs.sliderRef.value)
+      console.log(this.sliderMarks)
     },
     addSliderMarks () {
-      const Marks = {
-        0: '3h',
-        33: '1h',
-        66: '0.5h',
-        99: '5min'
-      }
-      if(!this.sliderMarks) {
-        this.sliderMarks = Marks
-      } else {
-        this.sliderMarks = []
-      }
+      console.log("添加")
     }
   }
 }

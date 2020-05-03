@@ -10,10 +10,10 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/slider',
-    name: 'slider',
-    component: () => import(/* webpackChunkName: "about" */ '../components/slider/slider.vue')
-  },
+    path: '/timeLine',
+    name: 'timeLine',
+    component: () => import(/* webpackChunkName: "about" */ '../components/timeLine/timeLine.vue')
+  }
 ]
 
 const router = new VueRouter({

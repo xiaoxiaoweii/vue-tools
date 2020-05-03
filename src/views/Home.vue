@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import slider from '../components/slider/slider'
+import slider from '../components/timeLine/components/timelineAxis'
 export default {
   name: 'Home',
   components: {
