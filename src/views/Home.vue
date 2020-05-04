@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <slider></slider>
+    <time-axis></time-axis>
   </div>
 </template>
 
 <script>
-import slider from '../components/timeLine/components/timelineAxis'
+import timeAxis from '../components/timeLine/components/timelineAxis'
 export default {
   name: 'Home',
   components: {
-    slider
+    timeAxis
   }
 }
 </script>
