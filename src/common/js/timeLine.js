@@ -1,26 +1,11 @@
-// 时间间隔参数 start
-// 滑块标记
-const sliderMarks = {
-  0: '3h',
-  33: '1h',
-  66: '0.5h',
-  99: '5min'
-}
-// 滑块可选位置数值 即离散相距间隔
-const sliderStep = 33
-// 滑块默认值
-const sliderValue = 0
+// 时间轴
+// 计算数组
+const computationalDateArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+// 时间轴时间间隔
+const timeInterval = 5
+// 时间轴刻度数量
+const timeAxisTicksNumber = 10
+// 播放速度
+const playSpeed = 10
 
-
-
-
-
-
-
-
-
-
-
-
-
-export{ sliderMarks,  sliderStep, sliderValue }
+export { computationalDateArray, timeInterval, timeAxisTicksNumber, playSpeed }
