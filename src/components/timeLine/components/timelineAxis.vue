@@ -1,5 +1,74 @@
 <template>
   <div class="content">
+    <!-- 播放速度 -->
+    <div class="play_speed_main">
+      <el-slider
+        v-model="speedSliderValue"
+        :step="speedSliderStep"
+        :show-tooltip="false"
+        vertical
+        show-stops
+        height="80px"
+        :marks="speedSliderMarks"
+        ref="sliderRef"
+        @change="changeSpeedSliderValue(speedSliderValue)"
+      ></el-slider>
+    </div>
+    <!-- 时间轴间隔 -->
+    <div class="play_interval_main">
+      <el-slider
+        v-model="intervalSliderValue"
+        :step="intervalSliderStep"
+        :show-tooltip="false"
+        vertical
+        show-stops
+        height="80px"
+        :marks="intervalSliderMarks"
+        ref="sliderRef"
+        @change="changeIntervalSliderValue(intervalSliderValue)"
+      ></el-slider>
+    </div>
+    <div class="play_control_main">
+      <div class="control_date"></div>
+      <div class="control_button">
+        <el-button
+          size="mini"
+          class="el-icon-d-arrow-left"
+          type="info"
+          round
+          @click="backTwoTimeIntervals"
+        ></el-button>
+        <el-button
+          size="mini"
+          class="el-icon-arrow-left"
+          type="info"
+          round
+          @click="backOneTimeIntervals"
+        ></el-button>
+        <el-button
+          size="mini"
+          :class="playPauseButtonIcon"
+          type="info"
+          round
+          @click="playPauseTimeline"
+        ></el-button>
+        <el-button
+          size="mini"
+          class="el-icon-arrow-right"
+          type="info"
+          round
+          @click="advanceOneTimeIntervals"
+        ></el-button>
+        <el-button
+          size="mini"
+          class="el-icon-d-arrow-right"
+          type="info"
+          round
+          @click="advanceTwoTimeIntervals"
+        ></el-button>
+      </div>
+    </div>
+    <div class="play_left_main"></div>
     <div class="timeline_main">
       <div class="timeline_axis">
         <!-- 进度条 -->
@@ -22,13 +91,37 @@
         </div>
       </div>
     </div>
+    <div class="play_right_main"></div>
   </div>
 </template>
 <script>
-import { computationalDateArray, timeInterval, timeAxisTicksNumber, playSpeed } from '../../../common/js/timeLine'
+import {
+  computationalDateArray,
+  timeInterval,
+  timeAxisTicksNumber,
+  playSpeed,
+  speedSliderStep,
+  speedSliderMarks,
+  speedSliderValue,
+  intervalSliderValue,
+  intervalSliderStep,
+  intervalSliderMarks
+} from '../../../common/js/timeLine'
 export default {
   data () {
     return {
+      // 速度滑块可选位置数值 即离散相距间隔
+      speedSliderStep: speedSliderStep,
+      // 速度滑块标记
+      speedSliderMarks: speedSliderMarks,
+      // 速度滑块
+      speedSliderValue: speedSliderValue,
+      // 时间轴间隔默认值
+      intervalSliderValue: intervalSliderValue,
+      // 间隔滑块可选位置数值
+      intervalSliderStep: intervalSliderStep,
+      // 间隔滑块可选位置标记
+      intervalSliderMarks: intervalSliderMarks,
       // 定时器
       intervalTimer: null, // 定时器
       // 计算日期数组
@@ -169,6 +262,14 @@ export default {
         currentActiveIndex = currentActiveIndex - this.timeAxisTicksNumber
       }
       this.activeIndex = currentActiveIndex
+    },
+    // 改变播放速度
+    changeSpeedSliderValue (value) {
+      console.log(value)
+    },
+    // 改变播放间隔
+    changeIntervalSliderValue (value) {
+      console.log(value)
     }
   }
 }
@@ -178,14 +279,61 @@ export default {
   padding: 0;
   margin: 0;
   width: 100%;
-  background: #2299cf;
+  background: #365abb;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   height: 120px;
+
+  .play_speed_main {
+    width: 150px;
+    float: left;
+    height: 120px;
+    border: 1px solid #fff;
+
+    .el-slider {
+      padding: 20px;
+    }
+  }
+  .play_interval_main {
+    width: 150px;
+    float: left;
+    height: 120px;
+    border: 1px solid #fff;
+    .el-slider {
+      padding: 20px;
+    }
+  }
+  .play_control_main {
+    width: 250px;
+    float: left;
+    background: #00fffa;
+    height: 120px;
+    border: 1px solid #fff;
+    .control_date {
+      background: #2299cf;
+      width: 100%;
+      height: 50%;
+    }
+    .control_button {
+      background: #262727;
+      width: 100%;
+      height: 50%;
+    }
+  }
+  .play_left_main {
+    width: 50px;
+    float: left;
+    background: #00fffa;
+    height: 120px;
+    border: 1px solid #fff;
+  }
   .timeline_main {
     padding: 30px;
     box-sizing: border-box;
     width: 1200px;
     height: 60px;
-    float: right;
+    float: left;
 
     .timeline_axis {
       position: relative;
@@ -244,6 +392,14 @@ export default {
         color: #fff;
       }
     }
+  }
+
+  .play_right_main {
+    width: 50px;
+    float: left;
+    background: #00fffa;
+    height: 120px;
+    border: 1px solid #fff;
   }
 }
 </style>
