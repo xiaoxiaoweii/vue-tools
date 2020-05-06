@@ -1,7 +1,10 @@
 <template>
   <div class="content">
     <div class="play_control_main">
+<<<<<<< HEAD
       <!-- 日期 -->
+=======
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       <div class="control_date">
         <el-date-picker
           v-model="timeRangeValue"
@@ -9,6 +12,7 @@
           start-placeholder="开始日期"
           end-placeholder="结束日期"
           size="small"
+<<<<<<< HEAD
           style="width: 230px; height: 30px; background: #7A888B; opacity:0.6;"
           value-format="yyyy-MM-dd HH:mm:ss"
           @change="changDateInterval"
@@ -28,6 +32,28 @@
 
     <div class="play_left_main" @click="lastDateScale">
       <!-- <img src="../../assets/images/timeline/backward.png" /> -->
+=======
+          style="width: 350px;"
+          @change="changDateInterval"
+          value-format="yyyy-MM-dd HH:mm:ss"
+        ></el-date-picker>
+      </div>
+      <div class="control_button">
+        <el-button size="small" class="el-icon-d-arrow-left" @click="backWarder" round></el-button>
+        <el-button size="small" class="el-icon-arrow-left" round></el-button>
+        <el-button
+          size="small"
+          :class="{'el-icon-video-play':!playing, 'el-icon-video-pause':playing}"
+          @click="playTimeAxis"
+          round
+        ></el-button>
+        <el-button size="small" class="el-icon-arrow-right" @click="forward" round></el-button>
+        <el-button size="small" class="el-icon-d-arrow-right" @click="forwarder" round></el-button>
+      </div>
+    </div>
+    <div class="play_left_main" @click="lastDateScale">
+      <div class="el-icon-arrow-left"></div>
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
     </div>
     <div class="timeline_main">
       <div class="timeline_axis">
@@ -84,6 +110,12 @@
         <option value="4000" style="background-color:rgba(255,255,255,0.5);">4s</option>
       </select>-->
     </div>
+<<<<<<< HEAD
+=======
+    <div class="play_right_main" @click="nextDateScale">
+      <div class="el-icon-arrow-right"></div>
+    </div>
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
   </div>
 </template>
 <script>
@@ -97,6 +129,7 @@ import {
   computationalDateArray,
   timeInterval,
   timeAxisTicksNumber,
+<<<<<<< HEAD
   playSpeed
 } from "../../../common/js/timeLine.js";
 export default {
@@ -120,10 +153,38 @@ export default {
         { name: "60min", value: "60" },
         { name: "180min", value: "180" }
       ],
+=======
+  playSpeed,
+  speedSliderStep,
+  speedSliderMarks,
+  speedSliderValue,
+  intervalSliderValue,
+  intervalSliderStep,
+  intervalSliderMarks
+} from "../../../common/js/timeLine";
+export default {
+  data() {
+    return {
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       // 带年份播放刻度
       currentTimeAxisScaleY: [],
       // 选取日期间隔绑定值
       timeRangeValue: "",
+<<<<<<< HEAD
+=======
+      // 速度滑块可选位置数值 即离散相距间隔
+      speedSliderStep: speedSliderStep,
+      // 速度滑块标记
+      speedSliderMarks: speedSliderMarks,
+      // 速度滑块
+      speedSliderValue: speedSliderValue,
+      // 时间轴间隔默认值
+      intervalSliderValue: intervalSliderValue,
+      // 间隔滑块可选位置数值
+      intervalSliderStep: intervalSliderStep,
+      // 间隔滑块可选位置标记
+      intervalSliderMarks: intervalSliderMarks,
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       // 定时器
       intervalTimer: null, // 定时器
       // 计算日期数组
@@ -132,6 +193,13 @@ export default {
       currentTimeAxisScale: [],
       // 鼠标移入的时间位置
       hoverIndex: -1,
+<<<<<<< HEAD
+=======
+      // 日期列表
+      dateTimeIndexes: [],
+      // 当前正在显示的日期列表
+      dateTimeIndexes: [],
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       // 当前显示的刻度
       currentTimelineScale: [],
       // 时间轴第一个刻度
@@ -156,6 +224,7 @@ export default {
     // 高亮的刻度
     highlightIndex() {
       return this.activeIndex;
+<<<<<<< HEAD
     },
     time_tip() {
       return this.$moment(this.currentTimeAxisScaleY[this.activeIndex]).format(
@@ -163,13 +232,34 @@ export default {
       )
     }
   },
+=======
+    }
+  },
+  mounted() {
+    // 初始化刻度
+    this.currentTimeAxisScaleY = this.$moment()
+      .add(0, "minutes")
+      .format("YYYY-MM-DD HH:mm:ss");
+    this.currentDateTime = this.$moment().format("YYYY-MM-DD HH:mm:ss");
+    // 初始化时间轴
+    this.renderTimeline();
+    // 浏览器窗口改变 重新初始化时间轴
+    let that = this;
+    window.onresize = function() {
+      that.renderTimeline();
+    };
+  },
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
   watch: {
     // 当playing改变触发
     playing() {
       if (this.playing) {
         this.intervalTimer = setInterval(() => {
+<<<<<<< HEAD
           // console.log(this.currentDateTime)
           // this.timeAxisDate(this.currentDateTime)
+=======
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
           this.activeIndex = this.activeIndex + 1;
           if (this.activeIndex > 9) {
             this.nextDateScale();
@@ -185,6 +275,7 @@ export default {
     },
     activeIndex() {
       this.currentDateTime = this.currentTimeAxisScaleY[this.activeIndex];
+<<<<<<< HEAD
       console.log(this.currentDateTime);
     }
   },
@@ -201,6 +292,10 @@ export default {
     window.onresize = function() {
       that.renderTimeline();
     };
+=======
+      console.log(this.currentDateTime)
+    }
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
   },
   methods: {
     //  播放进度条执行函数
@@ -215,7 +310,11 @@ export default {
       const currentArray = this.computationalDateArray.map(sweetItem => {
         return this.$moment(firstScale)
           .add(this.timeInterval * sweetItem, "minutes")
+<<<<<<< HEAD
           .format("HH:mm");
+=======
+          .format("MM-DD HH:mm");
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       });
       const currentArrayY = this.computationalDateArray.map(sweetItem => {
         return this.$moment(firstScale)
@@ -267,14 +366,21 @@ export default {
       this.renderTimeline(this.firstScale);
     },
     // 切换时间间隔
+<<<<<<< HEAD
     changTimeInterval(number, index) {
+=======
+    changTimeInterval(number) {
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       // // 正在播放时间轴 则切换刻度无效
       // if (this.playing) {
       //   return;
       // }
+<<<<<<< HEAD
       console.log(number, index);
       this.currentItemTags = number
       this.activeTags = index;
+=======
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       this.timeInterval = number;
       this.firstScale = this.$moment(this.currentTimeAxisScaleY[0]).format(
         "YYYY-MM-DD HH:mm:ss"
@@ -343,7 +449,11 @@ export default {
       // if (this.playing) {
       //   return;
       // }
+<<<<<<< HEAD
       console.log(value);
+=======
+      // console.log(value);
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       if (value === 0) {
         this.playSpeed = 4000;
         // console.log(this.playSpeed)
@@ -424,8 +534,32 @@ export default {
   left: 0;
   height: 120px;
 
+<<<<<<< HEAD
   .play_control_main {
     width: 280px;
+=======
+  .play_speed_main {
+    width: 100px;
+    float: left;
+    height: 120px;
+    // border: 1px solid #fff;
+
+    .el-slider {
+      padding: 20px;
+    }
+  }
+  .play_interval_main {
+    width: 100px;
+    float: left;
+    height: 120px;
+    // border: 1px solid #fff;
+    .el-slider {
+      padding: 20px;
+    }
+  }
+  .play_control_main {
+    width: 350px;
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
     float: left;
     // background: #00fffa;
     height: 120px;
@@ -434,6 +568,7 @@ export default {
       // background: #2299cf;
       width: 100%;
       height: 40%;
+<<<<<<< HEAD
       // padding-top: 19px;
       .el-range-input {
         background: #7a888b;
@@ -464,6 +599,20 @@ export default {
       // .el-tag_end {
       //   border-radius: 100%;
       // }
+=======
+      padding-top: 19px;
+    }
+    .control_button {
+      // background: #262727;
+      width: 100%;
+      height: 50%;
+      // padding-top: 0px;
+      padding-left: 40px;
+      .el-icon-error {
+        cursor: no-drop;
+        opacity: 0.5;
+      }
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
     }
   }
   // 上一时间段
@@ -473,7 +622,20 @@ export default {
     // background: #00fffa;
     height: 120px;
     // border: 1px solid #fff;
+<<<<<<< HEAD
     img {
+=======
+    .el-icon-arrow-left {
+      font-size: 30px;
+      margin-top: 24px;
+      margin-left: 12px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 6px;
+      padding-right: 6px;
+      border: 1.5px solid #fff;
+      border-radius: 12px;
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       cursor: pointer;
     }
   }
@@ -515,7 +677,11 @@ export default {
       .axis_item_tick {
         display: inline-block;
         width: 4px;
+<<<<<<< HEAD
         height: 15px;
+=======
+        height: 30px;
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
         background: #fff;
         transition: background 0.3s;
         cursor: pointer;
@@ -586,6 +752,7 @@ export default {
     width: 50px;
     float: left;
     // background: #00fffa;
+<<<<<<< HEAD
     height: 120px;
     img {
       cursor: pointer;
@@ -604,6 +771,20 @@ export default {
       line-height: 21px;
       font-size: 12px;
       opacity: 0.5;
+=======
+    height: 120px;
+    // border: 1px solid #fff;
+    .el-icon-arrow-right {
+      font-size: 30px;
+      margin-top: 24px;
+      margin-left: 2px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 6px;
+      padding-right: 6px;
+      border: 1.5px solid #fff;
+      border-radius: 12px;
+>>>>>>> 35ab189133f6885ce56a7d0ca67bb9b1b20bd144
       cursor: pointer;
     }
   }
