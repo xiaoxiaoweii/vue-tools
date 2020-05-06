@@ -6,7 +6,7 @@ const timeInterval = 5
 // 时间轴刻度数量
 const timeAxisTicksNumber = 10
 // 播放速度
-const playSpeed = 10
+const playSpeed = 4000
 // 速度滑块可选位置数值 即离散相距间隔
 const speedSliderStep = 33
 // 速度滑块标记
