@@ -6,7 +6,7 @@ const timeInterval = 5
 // 时间轴刻度数量
 const timeAxisTicksNumber = 10
 // 播放速度
-const playSpeed = 10
+const playSpeed = 4000
 // 速度滑块可选位置数值 即离散相距间隔
 const speedSliderStep = 33
 // 速度滑块标记
@@ -37,7 +37,23 @@ const speedSliderMarks = {
   }
 }
 // 速度滑块默认值
-const speedSliderValue = 0
+const speedValueOptions = [{
+    value: '200',
+    label: '200ms'
+  },
+  {
+    value: '500',
+    label: '500ms'
+  },
+  {
+    value: '1000',
+    label: '1s'
+  },
+  {
+    value: '4000',
+    label: '4s'
+  }
+]
 // 时间轴间隔默认值
 const intervalSliderValue = 0
 // 间隔滑块可选位置数值
@@ -74,9 +90,6 @@ export {
   timeInterval,
   timeAxisTicksNumber,
   playSpeed,
-  speedSliderStep,
-  speedSliderMarks,
-  speedSliderValue,
   intervalSliderValue,
   intervalSliderStep,
   intervalSliderMarks
